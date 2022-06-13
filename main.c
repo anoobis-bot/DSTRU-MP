@@ -14,41 +14,41 @@ void NextPlayerMove (bool ok, bool aTurn, int prev, int next, char P[][7])
 	c = next / 10;
 	d = next  % 10;
 
-	if  (aTurn && P[a - 1][b - 1] == ‘A’ && a == c + 1 && ( d == b || d == b + 1 || b == d + 1))
+	if  (aTurn && P[a - 1][b - 1] == 'A' && a == c + 1 && ( d == b || d == b + 1 || b == d + 1))
 		ok = !ok;
-	else if (!aTurn && P[a - 1][b - 1] == ‘B’ && c== a + 1 && ( d == b || d == b + 1 || b == d + 1))
+	else if (!aTurn && P[a - 1][b - 1] == 'B' && c== a + 1 && ( d == b || d == b + 1 || b == d + 1))
 		ok = !ok;
-	if (ok && aTurn && P[c - 1][d - 1] == ‘F’)
+	if (ok && aTurn && P[c - 1][d - 1] == 'F')
 	{
-		P[a - 1][b - 1] = ‘F’;
-		P[c - 1][d - 1] = ‘A’;
+		P[a - 1][b - 1] = 'F';
+		P[c - 1][d - 1] = 'A';
 		aTurn = !aTurn;
 		ok = !ok;
 	}
-	else if (ok && !aTurn && P[c - 1][d - 1] == ‘F’)
+	else if (ok && !aTurn && P[c - 1][d - 1] == 'F')
 	{
-		P[a - 1][b - 1] = ‘F’;
-		P[c - 1][d - 1] = ‘B’;
+		P[a - 1][b - 1] = 'F';
+		P[c - 1][d - 1] = 'B';
 		aTurn = !aTurn;
 		ok = !ok;
 	}
-	if (ok && aTurn && P[c - 1][d - 1] == ‘B’ && !(c % 2 == d % 2))
+	if (ok && aTurn && P[c - 1][d - 1] == 'B' && !(c % 2 == d % 2))
 		ok = !ok;
-	else if (ok && aTurn && P[c - 1][d - 1] == ‘B’ && (c % 2 == d % 2))
+	else if (ok && aTurn && P[c - 1][d - 1] == 'B' && (c % 2 == d % 2))
 	{
-		P[c - 1][d - 1] = ‘F’;
-		P[a - 1][b - 1] = ‘F’;
-		P[c - 1][d - 1] = ‘A’;
+		P[c - 1][d - 1] = 'F';
+		P[a - 1][b - 1] = 'F';
+		P[c - 1][d - 1] = 'A';
 		aTurn = !aTurn;
 		ok = !ok;
 	}
-	if (ok && !aTurn && P[c - 1][d - 1] == ‘A’ && !(c % 2 == d % 2))
+	if (ok && !aTurn && P[c - 1][d - 1] == 'A' && !(c % 2 == d % 2))
 		ok = !ok;
-	else if (ok && aTurn && P[c - 1][d - 1] == ‘B’ && (c % 2 == d % 2))
+	else if (ok && aTurn && P[c - 1][d - 1] == 'B' && (c % 2 == d % 2))
 	{
-		P[c - 1][d - 1] = ‘F’;
-		P[a - 1][b - 1] = ‘F’;
-		P[c - 1][d - 1] = ‘B’;
+		P[c - 1][d - 1] = 'F';
+		P[a - 1][b - 1] = 'F';
+		P[c - 1][d - 1] = 'B';
 		aTurn = !aTurn;
 		ok = !ok;
 	}
@@ -62,11 +62,11 @@ bool GameOver (bool over, char P[][7])
 	// |Beta| = 0
 	for (i = 0; i < 5; i++)
 		for (j = 0; j < 7 && !zero; j++)
-			if (P[i][j] == ‘B’)
+			if (P[i][j] == 'B')
 				zero = true;
 	if (zero)
 	{
-		printf(“Alpha Wins”);
+		printf("Alpha Wins");
 		return true;
 	}
 
@@ -74,11 +74,11 @@ bool GameOver (bool over, char P[][7])
 	zero = false;
 	for (i = 0; i < 5; i++)
 		for (j = 0; j < 7 && !zero; j++)
-			if (P[i][j] == ‘A’)
+			if (P[i][j] == 'A')
 				zero = true;
 	if (zero)
 	{
-		printf(“Beta Wins”);
+		printf("Beta Wins");
 		return true;
 	}
 	
@@ -86,11 +86,11 @@ bool GameOver (bool over, char P[][7])
 	zero = true;
 for (i = 0; i < 5; i++)
 		for (j = 0; j < 7 && zero; j++)
-			if (P[i][j] == ‘A’ && !((i % 2 == j % 2) && i >= 2))
+			if (P[i][j] == 'A' && !((i % 2 == j % 2) && i >= 2))
 			zero = false;
 	if (zero)
 	{
-		printf(“Alpha Wins”);
+		printf("Alpha Wins");
 		return true;
 	}
 
@@ -98,54 +98,60 @@ for (i = 0; i < 5; i++)
 	zero = true;
 	for (i = 0; i < 5; i++)
 		for (j = 0; j < 7 && zero; j++)
-			if (P[i][j] == ‘A’ && !((i % 2 == j % 2) && i <= 6))
+			if (P[i][j] == 'A' && !((i % 2 == j % 2) && i <= 6))
 			zero = false;
 	if (zero)
 	{
-		printf(“Beta Wins”);
+		printf("Beta Wins");
 		return true;
 	}
 
 	return false;
 }
 
-void Display (char P[][7])
+void Display (char P[7][5])
 {
 	int i;
 	int line = 196;
 	for(i = 0; i < 20; i ++)
-		printf(“%c”, line);
-	printf(“\n”);
-printf(“|  %c  |  %c  |  %c  |  %c  |  %c  |\n”, P[0][0], P[1][0], P[2][0], P[3][0], P[4][0]);
-	printf(“|  %c  |  %c  |  %c  |  %c  |  %c  |\n”, P[0][1], P[1][1], P[2][1], P[3][1], P[4][1]);
-	printf(“|  %c  |  %c  |  %c  |  %c  |  %c  |\n”, P[0][2], P[1][2], P[2][2], P[3][2], P[4][2]);
-	printf(“|  %c  |  %c  |  %c  |  %c  |  %c  |\n”, P[0][3], P[1][3], P[2][3], P[3][3], P[4][3]);
-	printf(“|  %c  |  %c  |  %c  |  %c  |  %c  |\n”, P[0][4], P[1][4], P[2][4], P[3][4], P[4][4]);
-	printf(“|  %c  |  %c  |  %c  |  %c  |  %c  |\n”, P[0][5], P[1][5], P[2][5], P[3][5], P[4][5]);
-	printf(“|  %c  |  %c  |  %c  |  %c  |  %c  |\n”, P[0][6], P[1][6], P[2][6], P[3][6], P[4][6]);
+		printf("%c", line);
+	printf("\n");
+	printf("|  %c  |  %c  |  %c  |  %c  |  %c  |\n", P[0][0], P[1][0], P[2][0], P[3][0], P[4][0]);
+	printf("|  %c  |  %c  |  %c  |  %c  |  %c  |\n", P[0][1], P[1][1], P[2][1], P[3][1], P[4][1]);
+	printf("|  %c  |  %c  |  %c  |  %c  |  %c  |\n", P[0][2], P[1][2], P[2][2], P[3][2], P[4][2]);
+	printf("|  %c  |  %c  |  %c  |  %c  |  %c  |\n", P[0][3], P[1][3], P[2][3], P[3][3], P[4][3]);
+	printf("|  %c  |  %c  |  %c  |  %c  |  %c  |\n", P[0][4], P[1][4], P[2][4], P[3][4], P[4][4]);
+	printf("|  %c  |  %c  |  %c  |  %c  |  %c  |\n", P[0][5], P[1][5], P[2][5], P[3][5], P[4][5]);
+	printf("|  %c  |  %c  |  %c  |  %c  |  %c  |\n", P[0][6], P[1][6], P[2][6], P[3][6], P[4][6]);
 	for(i = 0; i < 20; i ++)
-		printf(“%c”, line);
-	printf(“\n”);
+		printf("%c", line);
+	printf("\n");
 }
-int main () {
-
-bool over = false;
-bool ok = false;
-bool aTurn = true;
-char P[5][7] = {{‘B’, ‘F’, ‘B’, ‘F’, ‘B’},
-  {‘F’, ‘B’, ‘F’, ‘B’, ‘F’},
-  {‘F’, ‘F’, ‘F’, ‘F’, ‘F’},
-  {‘F’, ‘F’, ‘F’, ‘F’, ‘F’},
-  {‘F’, ‘F’, ‘F’, ‘F’, ‘F’},
-  {‘F’, ‘A’, ‘F’, ‘A’, ‘F’},
-  {‘A’, ‘F’, ‘A’, ‘F’, ‘A’}};
+int main () 
+{
+	bool over = false;
+	bool ok = false;
+	bool aTurn = true;
+	
+	char P[7][5] = 
+	{
+		{'B', 'F', 'B', 'F', 'B'},
+		{'F', 'B', 'F', 'B', 'F'},
+		{'F', 'F', 'F', 'F', 'F'},
+		{'F', 'F', 'F', 'F', 'F'},
+		{'F', 'F', 'F', 'F', 'F'},
+		{'F', 'A', 'F', 'A', 'F'},
+		{'A', 'F', 'A', 'F', 'A'}
+	};
 	int prev;
 	int next;
 	
-	printf(“Please enter prev.”);
-	scanf(“ %i”, &prev);
-	printf(“Please enter next.”);
-	scanf(“ %i”, &next);
+	Display(P);
+
+	printf("Please enter prev.");
+	scanf(" %i", &prev);
+	printf("Please enter next.");
+	scanf(" %i", &next);
 
 
 }
